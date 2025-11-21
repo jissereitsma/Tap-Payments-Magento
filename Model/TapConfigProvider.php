@@ -19,14 +19,14 @@ class TapConfigProvider implements ConfigProviderInterface
     ) {
         $this->method = $paymentHelper->getMethodInstance($this->methodCode);
         $this->urlBuilder = $urlBuilder;
-        $this->_checkoutSession = $checkoutSession;
+        $this->checkoutSession = $checkoutSession;
     }
 
     public function getConfig()
     {
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $order = $objectManager->get('Magento\Sales\Model\Order');
-        $current_order = $this->_checkoutSession->getLastRealOrder();
+        $current_order = $this->checkoutSession->getLastRealOrder();
         $orderId = $current_order->getEntityId();
         $test_public_key = $this->method->getConfigData('test_public_key');
         $live_public_key = $this->method->getConfigData('live_public_key');
